@@ -4,7 +4,9 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import GlobalStyle from './styles/global';
 import styled from 'styled-components';
 import Form from './components/Form.js';
+import Form2 from './components/Form2.js';
 import Grid from './components/Grid';
+import Grid2 from './components/Grid2';
 import { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -35,6 +37,7 @@ const Title = styled.h2``;
 
 function App() {
   const [users, setUsers] = useState([]);
+  const [trei, setTrei] = useState([]);
   const [onEdit, setOnEdit] = useState(null);
 
   const getUsers = async () => {
@@ -46,9 +49,22 @@ function App() {
     }
   };
 
+  const getTrei = async () => {
+    try {
+      const res2 = await axios.get("http://localhost:8800/treinos");
+      setTrei(res2.data.sort((a, b) => (a.exercicio > b.exercicio ? 1 : -1)));
+    } catch (error) {
+      toast.error(error);
+    }
+  };
+
   useEffect(() => {
     getUsers();
   }, [setUsers]);
+
+  useEffect(() => {
+    getTrei();
+  }, [setTrei]);
 
   return (
     <Router> {/* Adicione o componente Router em torno do conteúdo */}
@@ -65,6 +81,11 @@ function App() {
               <Title>Cadastro de Alunos</Title>
               <Form onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers} />
               <Grid setOnEdit={setOnEdit} users={users} setUsers={setUsers} />
+            </Route>
+            <Route path="/treinos">
+            <Title>Cadastro de Exercícios</Title>
+              <Form2 onEdit={onEdit} setOnEdit={setOnEdit} getTrei={getTrei} />
+              <Grid2 setOnEdit={setOnEdit} trei={trei} setTrei={setTrei} />
             </Route>
           </Switch>
         </Container>

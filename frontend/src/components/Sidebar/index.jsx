@@ -17,7 +17,9 @@ const Sidebar = ({ active }) => {
         <Link to="/"> {/* Adicione o Link para a página Home */}
           <SidebarItem Icon={FaHome} Text="Home" />
         </Link>
+        <Link to="/treinos">
         <SidebarItem Icon={FaChartBar} Text="Treinos" />
+        </Link>
         <Link to="/alunos">
         <SidebarItem Icon={FaUserAlt} Text="Alunos" />
         </Link>
