@@ -14,14 +14,14 @@ const Sidebar = ({ active }) => {
     <Container sidebar={active}>
       <FaTimes onClick={closeSidebar} />
       <Content>
-        <Link to="/"> {/* Adicione o Link para a página Home */}
+        <Link to="/" style={{ textDecoration: 'none' }}> {/* Adicione o Link para a página Home */}
           <SidebarItem Icon={FaHome} Text="Home" />
         </Link>
-        <Link to="/treinos">
-        <SidebarItem Icon={FaChartBar} Text="Treinos" />
+        <Link to="/treinos" style={{ textDecoration: 'none' }}>
+          <SidebarItem Icon={FaChartBar} Text="Treinos" />
         </Link>
-        <Link to="/alunos">
-        <SidebarItem Icon={FaUserAlt} Text="Alunos" />
+        <Link to="/alunos" style={{ textDecoration: 'none' }}>
+          <SidebarItem Icon={FaUserAlt} Text="Alunos" />
         </Link>
         <SidebarItem Icon={FaEnvelope} Text="E-Mail" />
         <SidebarItem Icon={FaRegCalendarAlt} Text="Calendário" />
