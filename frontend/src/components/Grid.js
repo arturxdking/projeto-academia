@@ -41,6 +41,16 @@ export const Td = styled.td`
   }
 `;
 
+const EditButton = styled(FaEdit)`
+  cursor: pointer;
+
+`;
+
+const DeleteButton = styled(FaTrash)`
+  cursor: pointer;
+
+`;
+
 const Grid = ({ users, setUsers, setOnEdit }) => {
   const handleEdit = (item) => {
     setOnEdit(item);
@@ -65,8 +75,8 @@ const Grid = ({ users, setUsers, setOnEdit }) => {
       <Thead>
         <Tr>
           <Th>Nome</Th>
-          <Th>Email</Th>
-          <Th onlyWeb>Fone</Th>
+          <Th>E-mail</Th>
+          <Th onlyWeb>Telefone</Th>
           <Th></Th>
           <Th></Th>
         </Tr>
@@ -80,10 +90,10 @@ const Grid = ({ users, setUsers, setOnEdit }) => {
               {item.fone}
             </Td>
             <Td alignCenter width="5%">
-              <FaEdit onClick={() => handleEdit(item)} />
+              <EditButton onClick={() => handleEdit(item)} />
             </Td>
             <Td alignCenter width="5%">
-              <FaTrash onClick={() => handleDelete(item.id)} />
+              <DeleteButton onClick={() => handleDelete(item.id)} />
             </Td>
           </Tr>
         ))}

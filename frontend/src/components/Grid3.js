@@ -39,6 +39,11 @@ const Td = styled.td`
   @media (max-width: 500px) {
     display: ${(props) => props.onlyWeb ? "none" : "table-cell"};
   }
+
+  /* Adicione um espaçamento entre os botões de editar e deletar */
+  &:nth-last-child(2) {
+    padding-right: 15px; /* Ajuste o valor conforme necessário */
+  }
 `;
 
 const EditButton = styled(FaEdit)`
@@ -51,19 +56,19 @@ const DeleteButton = styled(FaTrash)`
 
 `;
 
-const Grid2 = ({ trei, setTrei, setOnEdit }) => {
+const Grid3 = ({ prof, setProf, setOnEdit }) => {
   const handleEdit = (item) => {
     setOnEdit(item);
   };
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8800/treinos${id}`);
-      const newArray = trei.filter((trei) => trei.id !== id);
-      setTrei(newArray);
-      toast.success("Exercício deletado com sucesso!");
+      await axios.delete(`http://localhost:8800/professor${id}`);
+      const newArray = prof.filter((prof) => prof.id !== id);
+      setProf(newArray);
+      toast.success("Professor deletado com sucesso!");
     } catch (error) {
-      toast.error("Ocorreu um erro ao deletar o exercício.");
+      toast.error("Ocorreu um erro ao deletar o professor.");
     }
 
     setOnEdit(null);
@@ -73,25 +78,26 @@ const Grid2 = ({ trei, setTrei, setOnEdit }) => {
     <Table>
       <Thead>
         <Tr>
-          <Th>Exercício</Th>
-          <Th>Séries</Th>
-          <Th onlyWeb>Repetições</Th>
-          <Th></Th>
+          <Th>Nome</Th>
+          <Th>E-mail</Th>
+          <Th onlyWeb>Telefone</Th>
+          <Th>CREF</Th>
           <Th></Th>
         </Tr>
       </Thead>
       <Tbody>
-        {trei.map((item, i) => (
+        {prof.map((item, i) => (
           <Tr key={i}>
-            <Td width="30%">{item.exercicio}</Td>
-            <Td width="30%">{item.series}</Td>
+            <Td width="30%">{item.nome}</Td>
+            <Td width="30%">{item.email}</Td>
             <Td width="20%" onlyWeb>
-              {item.repeticoes}
+              {item.fone}
             </Td>
-            <Td alignCenter width="5%">
+            <Td width="30%">{item.cref}</Td>
+            <Td alignCenter width="10%">
               <EditButton onClick={() => handleEdit(item)} />
             </Td>
-            <Td alignCenter width="5%">
+            <Td alignCenter width="10%">
               <DeleteButton onClick={() => handleDelete(item.id)} />
             </Td>
           </Tr>
@@ -101,4 +107,4 @@ const Grid2 = ({ trei, setTrei, setOnEdit }) => {
   );
 };
 
-export default Grid2;
+export default Grid3;

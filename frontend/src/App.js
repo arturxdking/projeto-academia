@@ -5,8 +5,10 @@ import GlobalStyle from './styles/global';
 import styled from 'styled-components';
 import Form from './components/Form.js';
 import Form2 from './components/Form2.js';
+import Form3 from './components/Form3.js';
 import Grid from './components/Grid';
 import Grid2 from './components/Grid2';
+import Grid3 from './components/Grid3';
 import { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -38,6 +40,7 @@ const Title = styled.h2``;
 function App() {
   const [users, setUsers] = useState([]);
   const [trei, setTrei] = useState([]);
+  const [prof, setProf] = useState([]);
   const [onEdit, setOnEdit] = useState(null);
 
   const getUsers = async () => {
@@ -58,6 +61,15 @@ function App() {
     }
   };
 
+  const getProf = async () => {
+    try {
+      const res3 = await axios.get("http://localhost:8800/professor");
+      setProf(res3.data.sort((a, b) => (a.nome > b.nome ? 1 : -1)));
+    } catch (error) {
+      toast.error(error);
+    }
+  };
+
   useEffect(() => {
     getUsers();
   }, [setUsers]);
@@ -65,6 +77,10 @@ function App() {
   useEffect(() => {
     getTrei();
   }, [setTrei]);
+
+  useEffect(() => {
+    getProf();
+  }, [setProf]);
 
   return (
     <Router> {/* Adicione o componente Router em torno do conteúdo */}
@@ -86,6 +102,11 @@ function App() {
             <Title>Cadastro de Exercícios</Title>
               <Form2 onEdit={onEdit} setOnEdit={setOnEdit} getTrei={getTrei} />
               <Grid2 setOnEdit={setOnEdit} trei={trei} setTrei={setTrei} />
+            </Route>
+            <Route path="/professor">
+            <Title>Cadastro de Professor</Title>
+              <Form3 onEdit={onEdit} setOnEdit={setOnEdit} getProf={getProf} />
+              <Grid3 setOnEdit={setOnEdit} prof={prof} setProf={setProf} />
             </Route>
           </Switch>
         </Container>

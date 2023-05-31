@@ -39,71 +39,79 @@ const Button = styled.button`
   height: 42px;
 `;
 
-const Form2 = ({ getTrei, onEdit, setOnEdit }) => {
+const Form3 = ({ getProf, onEdit, setOnEdit }) => {
   const ref = useRef();
 
   useEffect(() => {
     if (onEdit) {
-      const trei = ref.current;
+      const prof = ref.current;
 
-      trei.exercicio.value = onEdit.exercicio;
-      trei.series.value = onEdit.series;
-      trei.repeticoes.value = onEdit.repeticoes;
+      prof.nome.value = onEdit.nome;
+      prof.email.value = onEdit.email;
+      prof.fone.value = onEdit.fone;
+      prof.cref.value = onEdit.cref;
     }
   }, [onEdit]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const trei = ref.current;
+    const prof = ref.current;
 
     if (
-      !trei.exercicio.value ||
-      !trei.series.value ||
-      !trei.repeticoes.value
+      !prof.nome.value ||
+      !prof.email.value ||
+      !prof.fone.value ||
+      !prof.cref.value
     ) {
       return toast.warn("Preencha todos os campos!");
     }
 
     try {
       const data = {
-        exercicio: trei.exercicio.value,
-        series: trei.series.value,
-        repeticoes: trei.repeticoes.value,
+        nome: prof.nome.value,
+        email: prof.email.value,
+        fone: prof.fone.value,
+        cref: prof.cref.value,
       };
 
       if (onEdit) {
-        await axios.put(`http://localhost:8800/treinos${onEdit.id}`, data);
-        toast.success("Exercício atualizado com sucesso!");
+        await axios.put(`http://localhost:8800/professor${onEdit.id}`, data);
+        toast.success("Professor atualizado com sucesso!");
       } else {
-        await axios.post("http://localhost:8800/treinos", data);
-        toast.success("Exercício cadastrado com sucesso!");
+        await axios.post("http://localhost:8800/professor", data);
+        toast.success("Professor cadastrado com sucesso!");
       }
 
-      trei.exercicio.value = "";
-      trei.series.value = "";
-      trei.repeticoes.value = "";
+      prof.nome.value = "";
+      prof.email.value = "";
+      prof.fone.value = "";
+      prof.cref.value = "";
 
       setOnEdit(null);
-      getTrei();
+      getProf();
     } catch (error) {
-      toast.error("Ocorreu um erro ao salvar o exercício.");
+      toast.error("Ocorreu um erro ao salvar o professor.");
     }
   };
 
   return (
     <FormContainer ref={ref} onSubmit={handleSubmit}>
       <InputArea>
-        <Label>Exercício</Label>
-        <Input name="exercicio" />
+        <Label>Nome</Label>
+        <Input name="nome" />
       </InputArea>
       <InputArea>
-        <Label>Séries</Label>
-        <Input name="series" />
+        <Label>E-mail</Label>
+        <Input name="email" type="email" />
       </InputArea>
       <InputArea>
-        <Label>Repetições</Label>
-        <Input name="repeticoes" />
+        <Label>Telefone</Label>
+        <Input name="fone" />
+      </InputArea>
+      <InputArea>
+        <Label>CREF</Label>
+        <Input name="cref" />
       </InputArea>
 
       <Button type="submit">SALVAR</Button>
@@ -111,4 +119,4 @@ const Form2 = ({ getTrei, onEdit, setOnEdit }) => {
   );
 };
 
-export default Form2;
+export default Form3;
