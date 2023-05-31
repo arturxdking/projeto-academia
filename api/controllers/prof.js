@@ -1,9 +1,9 @@
-import { db4 } from "../db4.js";
+import { db } from "../db.js";
 
 export const getProf = (_, res) => {
   const q = "SELECT * FROM professor";
 
-  db4.query(q, (err, data) => {
+  db.query(q, (err, data) => {
     if (err) return res.json(err);
 
     return res.status(200).json(data);
@@ -21,7 +21,7 @@ export const addProf = (req, res) => {
     req.body.cref,
   ];
 
-  db4.query(q, [values], (err) => {
+  db.query(q, [values], (err) => {
     if (err) return res.json(err);
 
     return res.status(200).json("Professor cadastrado com sucesso.");
@@ -39,7 +39,7 @@ export const updateProf = (req, res) => {
     req.body.cref,
   ];
 
-  db4.query(q, [...values, req.params.id], (err) => {
+  db.query(q, [...values, req.params.id], (err) => {
     if (err) return res.json(err);
 
     return res.status(200).json("Professor atualizado com sucesso.");
@@ -49,7 +49,7 @@ export const updateProf = (req, res) => {
 export const deleteProf = (req, res) => {
   const q = "DELETE FROM professor WHERE `id` = ?";
 
-  db4.query(q, [req.params.id], (err) => {
+  db.query(q, [req.params.id], (err) => {
     if (err) return res.json(err);
 
     return res.status(200).json("Professor deletado com sucesso.");

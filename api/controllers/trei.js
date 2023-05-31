@@ -1,9 +1,9 @@
-import { db3 } from "../db3.js";
+import { db } from "../db.js";
 
 export const getTrei = (_, res) => {
   const q = "SELECT * FROM treinos";
 
-  db3.query(q, (err, data) => {
+  db.query(q, (err, data) => {
     if (err) return res.json(err);
 
     return res.status(200).json(data);
@@ -20,7 +20,7 @@ export const addTrei = (req, res) => {
     req.body.repeticoes,
   ];
 
-  db3.query(q, [values], (err) => {
+  db.query(q, [values], (err) => {
     if (err) return res.json(err);
 
     return res.status(200).json("Exercício criado com sucesso.");
@@ -37,7 +37,7 @@ export const updateTrei = (req, res) => {
     req.body.repeticoes,
   ];
 
-  db3.query(q, [...values, req.params.id], (err) => {
+  db.query(q, [...values, req.params.id], (err) => {
     if (err) return res.json(err);
 
     return res.status(200).json("Exercício atualizado com sucesso.");
@@ -47,7 +47,7 @@ export const updateTrei = (req, res) => {
 export const deleteTrei = (req, res) => {
   const q = "DELETE FROM treinos WHERE `id` = ?";
 
-  db3.query(q, [req.params.id], (err) => {
+  db.query(q, [req.params.id], (err) => {
     if (err) return res.json(err);
 
     return res.status(200).json("Exercício deletado com sucesso.");
