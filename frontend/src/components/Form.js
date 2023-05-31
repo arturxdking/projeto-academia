@@ -49,7 +49,7 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
       user.nome.value = onEdit.nome;
       user.email.value = onEdit.email;
       user.fone.value = onEdit.fone;
-      user.data_nascimento.value = onEdit.data_nascimento;
+      user.data_nascimento.value = onEdit.data_nascimento.split('T')[0];
     }
   }, [onEdit]);
 
