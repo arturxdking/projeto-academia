@@ -73,7 +73,7 @@ const Form2 = ({ getTrei, onEdit, setOnEdit }) => {
       };
 
       if (onEdit) {
-        await axios.put(`http://localhost:8800/treinos${onEdit.id}`, data);
+        await axios.put(`http://localhost:8800/treinos/${onEdit.id}`, data);
         toast.success("Exercício atualizado com sucesso!");
       } else {
         await axios.post("http://localhost:8800/treinos", data);

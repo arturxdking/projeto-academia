@@ -76,7 +76,7 @@ const Form3 = ({ getProf, onEdit, setOnEdit }) => {
       };
 
       if (onEdit) {
-        await axios.put(`http://localhost:8800/professor${onEdit.id}`, data);
+        await axios.put(`http://localhost:8800/professor/${onEdit.id}`, data);
         toast.success("Professor atualizado com sucesso!");
       } else {
         await axios.post("http://localhost:8800/professor", data);

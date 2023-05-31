@@ -43,12 +43,10 @@ const Td = styled.td`
 
 const EditButton = styled(FaEdit)`
   cursor: pointer;
-
 `;
 
 const DeleteButton = styled(FaTrash)`
   cursor: pointer;
-
 `;
 
 const Grid2 = ({ trei, setTrei, setOnEdit }) => {
@@ -58,7 +56,7 @@ const Grid2 = ({ trei, setTrei, setOnEdit }) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8800/treinos${id}`);
+      await axios.delete(`http://localhost:8800/treinos/${id}`);
       const newArray = trei.filter((trei) => trei.id !== id);
       setTrei(newArray);
       toast.success("Exercício deletado com sucesso!");

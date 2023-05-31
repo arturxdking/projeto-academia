@@ -48,12 +48,10 @@ const Td = styled.td`
 
 const EditButton = styled(FaEdit)`
   cursor: pointer;
-
 `;
 
 const DeleteButton = styled(FaTrash)`
   cursor: pointer;
-
 `;
 
 const Grid3 = ({ prof, setProf, setOnEdit }) => {
@@ -63,7 +61,7 @@ const Grid3 = ({ prof, setProf, setOnEdit }) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8800/professor${id}`);
+      await axios.delete(`http://localhost:8800/professor/${id}`);
       const newArray = prof.filter((prof) => prof.id !== id);
       setProf(newArray);
       toast.success("Professor deletado com sucesso!");
